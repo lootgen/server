@@ -1,5 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Loot Bag resolver can create a loot bag with duplicate items 1`] = `
+Object {
+  "data": Object {
+    "createLootBag": Object {
+      "id": 1,
+      "items": Array [
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 0,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 1,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 2,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 3,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 4,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 5,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 6,
+        },
+        Object {
+          "item": Object {
+            "name": "gm",
+          },
+          "order": 7,
+        },
+      ],
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
 exports[`Loot Bag resolver can create a new loot bag 1`] = `
 Object {
   "data": Object {
@@ -7,28 +74,52 @@ Object {
       "id": 1,
       "items": Array [
         Object {
-          "name": "1",
+          "item": Object {
+            "name": "1",
+          },
+          "order": 0,
         },
         Object {
-          "name": "2",
+          "item": Object {
+            "name": "2",
+          },
+          "order": 1,
         },
         Object {
-          "name": "3",
+          "item": Object {
+            "name": "3",
+          },
+          "order": 2,
         },
         Object {
-          "name": "4",
+          "item": Object {
+            "name": "4",
+          },
+          "order": 3,
         },
         Object {
-          "name": "5",
+          "item": Object {
+            "name": "5",
+          },
+          "order": 4,
         },
         Object {
-          "name": "6",
+          "item": Object {
+            "name": "6",
+          },
+          "order": 5,
         },
         Object {
-          "name": "7",
+          "item": Object {
+            "name": "7",
+          },
+          "order": 6,
         },
         Object {
-          "name": "8",
+          "item": Object {
+            "name": "8",
+          },
+          "order": 7,
         },
       ],
     },
@@ -49,28 +140,52 @@ Object {
     "lootBag": Object {
       "items": Array [
         Object {
-          "name": "1",
+          "item": Object {
+            "name": "1",
+          },
+          "order": 0,
         },
         Object {
-          "name": "2",
+          "item": Object {
+            "name": "2",
+          },
+          "order": 1,
         },
         Object {
-          "name": "3",
+          "item": Object {
+            "name": "3",
+          },
+          "order": 2,
         },
         Object {
-          "name": "4",
+          "item": Object {
+            "name": "4",
+          },
+          "order": 3,
         },
         Object {
-          "name": "5",
+          "item": Object {
+            "name": "5",
+          },
+          "order": 4,
         },
         Object {
-          "name": "6",
+          "item": Object {
+            "name": "6",
+          },
+          "order": 5,
         },
         Object {
-          "name": "7",
+          "item": Object {
+            "name": "7",
+          },
+          "order": 6,
         },
         Object {
-          "name": "8",
+          "item": Object {
+            "name": "8",
+          },
+          "order": 7,
         },
       ],
     },
@@ -91,28 +206,52 @@ Object {
     "lootBag": Object {
       "items": Array [
         Object {
-          "name": "8",
+          "item": Object {
+            "name": "8",
+          },
+          "order": 0,
         },
         Object {
-          "name": "7",
+          "item": Object {
+            "name": "7",
+          },
+          "order": 1,
         },
         Object {
-          "name": "6",
+          "item": Object {
+            "name": "6",
+          },
+          "order": 2,
         },
         Object {
-          "name": "5",
+          "item": Object {
+            "name": "5",
+          },
+          "order": 3,
         },
         Object {
-          "name": "4",
+          "item": Object {
+            "name": "4",
+          },
+          "order": 4,
         },
         Object {
-          "name": "3",
+          "item": Object {
+            "name": "3",
+          },
+          "order": 5,
         },
         Object {
-          "name": "2",
+          "item": Object {
+            "name": "2",
+          },
+          "order": 6,
         },
         Object {
-          "name": "1",
+          "item": Object {
+            "name": "1",
+          },
+          "order": 7,
         },
       ],
     },

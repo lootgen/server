@@ -6,7 +6,10 @@ const FETCH_LOOT_BAG = gql`
   query lootBag($id: Int!) {
     lootBag(input: { id: $id }) {
       items {
-        name
+        item {
+          name
+        }
+        order
       }
     }
   }
@@ -17,7 +20,10 @@ const CREATE_LOOT_BAG_MUTATION = gql`
     createLootBag(input: { items: $items }) {
       id
       items {
-        name
+        item {
+          name
+        }
+        order
       }
     }
   }
@@ -78,6 +84,14 @@ describe('Loot Bag resolver', () => {
     const result = await global.client.mutate({
       mutation: CREATE_LOOT_BAG_MUTATION,
       variables: { items: ITEMS },
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+  it('can create a loot bag with duplicate items', async () => {
+    const result = await global.client.mutate({
+      mutation: CREATE_LOOT_BAG_MUTATION,
+      variables: { items: ['gm', 'gm', 'gm', 'gm', 'gm', 'gm', 'gm', 'gm'] },
     });
     expect(result).toMatchSnapshot();
   });

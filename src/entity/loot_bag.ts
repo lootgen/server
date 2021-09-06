@@ -2,11 +2,9 @@ import { Field, Int, ObjectType } from 'type-graphql';
 import {
   AfterLoad,
   BaseEntity,
-  Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -25,22 +23,15 @@ export class LootBag extends BaseEntity implements ILootBag {
   @CreateDateColumn()
   readonly created: Date;
 
-  @Field((_type) => [LootItem])
-  @ManyToMany('LootItem', {
+  @Field(() => [LootItem])
+  @OneToMany(() => LootItem, (lootItem) => lootItem.bag, {
     eager: true,
     cascade: true,
   })
-  @JoinTable()
   items: ILootItem[];
-
-  @Column({ nullable: false })
-  raw: string;
 
   @AfterLoad()
   sortItems(): void {
-    const sortedItems = this.raw.split('\n');
-    this.items.sort((left, right) => {
-      return sortedItems.indexOf(left.name) - sortedItems.indexOf(right.name);
-    });
+    this.items.sort((left, right) => left.order - right.order);
   }
 }
