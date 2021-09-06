@@ -1,5 +1,17 @@
 import { gql } from 'apollo-server';
 
+import { makeLootBag } from '../../entity/factories';
+
+const FETCH_LOOT_BAG = gql`
+  query lootBag($id: Int!) {
+    lootBag(input: { id: $id }) {
+      items {
+        name
+      }
+    }
+  }
+`;
+
 const CREATE_LOOT_BAG_MUTATION = gql`
   mutation createLootBag($items: [String!]!) {
     createLootBag(input: { items: $items }) {
@@ -14,6 +26,25 @@ const CREATE_LOOT_BAG_MUTATION = gql`
 const ITEMS = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
 describe('Loot Bag resolver', () => {
+  it('can fetch a loot bag by ID', async () => {
+    const lootBag = await makeLootBag(ITEMS);
+    const result = await global.client.query({
+      query: FETCH_LOOT_BAG,
+      variables: { id: lootBag.id },
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+  it('sorts loot items based on insert order', async () => {
+    const reversedItems = [...ITEMS].reverse();
+    const lootBag = await makeLootBag(reversedItems);
+    const result = await global.client.query({
+      query: FETCH_LOOT_BAG,
+      variables: { id: lootBag.id },
+    });
+    expect(result).toMatchSnapshot();
+  });
+
   it('throws error: items must contain 8 elements', async () => {
     let result = await global.client.mutate({
       mutation: CREATE_LOOT_BAG_MUTATION,

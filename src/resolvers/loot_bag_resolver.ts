@@ -1,15 +1,14 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql';
-import { ILike } from 'typeorm';
 
+import { makeLootBag } from '../entity/factories';
 import { LootBag } from '../entity/loot_bag';
-import { LootItem } from '../entity/loot_item';
 import CreateLootBagInput from './types/create_loot_bag_input';
-import FetchItemInput from './types/fetch_item_input';
+import FetchLootBagInput from './types/fetch_loot_bag_input';
 
 @Resolver()
 export class LootBagResolver {
   @Query((_returns) => LootBag)
-  async lootBag(@Arg('input') { id }: FetchItemInput): Promise<LootBag> {
+  async lootBag(@Arg('input') { id }: FetchLootBagInput): Promise<LootBag> {
     return await LootBag.findOneOrFail(id);
   }
 
@@ -17,22 +16,6 @@ export class LootBagResolver {
   async createLootBag(
     @Arg('input') { items }: CreateLootBagInput
   ): Promise<LootBag> {
-    const lootItems = await items.reduce(async (previous, item) => {
-      const acc = await previous;
-      try {
-        const result = await LootItem.findOneOrFail({
-          where: { name: ILike(item) },
-        });
-        return [...acc, result];
-      } catch (_error) {
-        const result = new LootItem();
-        result.name = item;
-        await result.save();
-        return [...acc, result];
-      }
-    }, Promise.resolve([]));
-    const result = new LootBag();
-    result.items = lootItems;
-    return await result.save();
+    return await makeLootBag(items);
   }
 }

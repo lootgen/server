@@ -43,6 +43,90 @@ Object {
 }
 `;
 
+exports[`Loot Bag resolver can fetch a loot bag by ID 1`] = `
+Object {
+  "data": Object {
+    "lootBag": Object {
+      "items": Array [
+        Object {
+          "name": "1",
+        },
+        Object {
+          "name": "2",
+        },
+        Object {
+          "name": "3",
+        },
+        Object {
+          "name": "4",
+        },
+        Object {
+          "name": "5",
+        },
+        Object {
+          "name": "6",
+        },
+        Object {
+          "name": "7",
+        },
+        Object {
+          "name": "8",
+        },
+      ],
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Loot Bag resolver sorts loot items based on insert order 1`] = `
+Object {
+  "data": Object {
+    "lootBag": Object {
+      "items": Array [
+        Object {
+          "name": "8",
+        },
+        Object {
+          "name": "7",
+        },
+        Object {
+          "name": "6",
+        },
+        Object {
+          "name": "5",
+        },
+        Object {
+          "name": "4",
+        },
+        Object {
+          "name": "3",
+        },
+        Object {
+          "name": "2",
+        },
+        Object {
+          "name": "1",
+        },
+      ],
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
 exports[`Loot Bag resolver throws error: items must contain 8 elements 1`] = `
 Object {
   "data": null,

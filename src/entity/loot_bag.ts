@@ -1,6 +1,8 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from 'type-graphql';
 import {
+  AfterLoad,
   BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
   JoinTable,
@@ -15,7 +17,7 @@ import { LootItem } from './loot_item';
 @ObjectType()
 @Entity()
 export class LootBag extends BaseEntity implements ILootBag {
-  @Field()
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   readonly id: number;
 
@@ -30,4 +32,15 @@ export class LootBag extends BaseEntity implements ILootBag {
   })
   @JoinTable()
   items: ILootItem[];
+
+  @Column({ nullable: false })
+  raw: string;
+
+  @AfterLoad()
+  sortItems(): void {
+    const sortedItems = this.raw.split('\n');
+    this.items.sort((left, right) => {
+      return sortedItems.indexOf(left.name) - sortedItems.indexOf(right.name);
+    });
+  }
 }
