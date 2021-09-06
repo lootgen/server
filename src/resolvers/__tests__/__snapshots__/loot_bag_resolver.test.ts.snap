@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loot Bag resolver can create a new loot bag 1`] = `
+Object {
+  "data": Object {
+    "createLootBag": Object {
+      "id": 1,
+      "items": Array [
+        Object {
+          "name": "1",
+        },
+        Object {
+          "name": "2",
+        },
+        Object {
+          "name": "3",
+        },
+        Object {
+          "name": "4",
+        },
+        Object {
+          "name": "5",
+        },
+        Object {
+          "name": "6",
+        },
+        Object {
+          "name": "7",
+        },
+        Object {
+          "name": "8",
+        },
+      ],
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Loot Bag resolver throws error: items must contain 8 elements 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Argument Validation Error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Loot Bag resolver throws error: items must contain 8 elements 2`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Argument Validation Error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Loot Bag resolver throws error: items must contain 8 elements 3`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Argument Validation Error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
+
+exports[`Loot Bag resolver throws error: loot items cannot be empty strings 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Argument Validation Error],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
