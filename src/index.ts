@@ -32,9 +32,7 @@ import { ALL_RESOLVERS } from './resolvers';
         entities: ['entity/**/*.ts', 'entity/**/*.js'],
         migrations: ['migration/**/*.ts', 'migration/**/*.js'],
         subscribers: ['subscriber/**/*.ts', 'subscriber/**/*.js'],
-        extra: {
-          ssl: true,
-        },
+        ssl: { rejectUnauthorized: false },
       };
       global.connection = await createConnection(postgresConnectionOptions);
     } else {
