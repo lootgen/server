@@ -30,6 +30,7 @@
     "class-validator": "^0.13.1",
     "graphql": "^15.5.2",
     "node-fetch": "^2.6.0",
+    "pg": "^8.7.1",
     "pg-connection-string": "^2.5.0",
     "prompt": "^1.0.0",
     "reflect-metadata": "^0.1.13",
