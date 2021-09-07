@@ -13,10 +13,6 @@
          "src/migration/**/*.ts",
          "src/migration/**/*.js"
       ],
-      "subscribers": [
-         "src/subscriber/**/*.ts",
-         "src/subscriber/**/*.js"
-      ],
       "cli": {
          "entitiesDir": "src/entity",
          "migrationsDir": "src/migration",
@@ -34,9 +30,6 @@
       ],
       "migrations": [
          "src/migration/**/*.ts"
-      ],
-      "subscribers": [
-         "src/subscriber/**/*.ts"
       ]
    }
 ]
