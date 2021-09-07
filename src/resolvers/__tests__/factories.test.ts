@@ -1,6 +1,6 @@
-import { makeLootBag } from '../factories';
+import { makeLootBag } from '../../entity/factories';
 
-describe('Factories', () => {
+describe('Entity factories', () => {
   it('will retrieve an existing loot bag if it is a duplicate', async () => {
     const lootBag = await makeLootBag([
       'gm',
