@@ -29,8 +29,8 @@ import { ALL_RESOLVERS } from './resolvers';
         database: connectionOptions.database ?? undefined,
         synchronize: false,
         logging: false,
-        entities: ['src/entity/**/*.ts', 'src/entity/**/*.js'],
-        migrations: ['src/migration/**/*.ts', 'src/migration/**/*.js'],
+        entities: ['src/entity/**/*.ts', 'entity/**/*.js'],
+        migrations: ['src/migration/**/*.ts', 'migration/**/*.js'],
         ssl: { rejectUnauthorized: false },
       };
       global.connection = await createConnection(postgresConnectionOptions);
