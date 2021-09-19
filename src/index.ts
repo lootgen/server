@@ -52,7 +52,7 @@ import { ALL_RESOLVERS } from './resolvers';
     await server.start();
 
     const app = express();
-    const corsOptions: CorsOptions = { origin: 'http://www.lootgen.party' };
+    const corsOptions: CorsOptions = { origin: 'https://www.lootgen.party' };
     app.use(cors(corsOptions));
     registerExpressAPI(app);
 
