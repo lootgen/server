@@ -34,6 +34,7 @@
     "pg-connection-string": "^2.5.0",
     "prompt": "^1.0.0",
     "reflect-metadata": "^0.1.13",
+    "svg2img": "^0.9.3",
     "ts-node": "3.3.0",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.37",
