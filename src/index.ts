@@ -51,6 +51,11 @@ import registerExpressAPI from './api';
     await server.start();
 
     const app = express();
+    app.use((req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', 'https://www.lootgen.party');
+      next();
+    });
+
     registerExpressAPI(app);
 
     server.applyMiddleware({ app });

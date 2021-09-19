@@ -33,7 +33,6 @@ const registerExpressAPI = (app: core.Express): void => {
         },
         (error, buffer) => {
           res.writeHead(200, {
-            'Access-Control-Allow-Origin': '*',
             'Content-Type': 'image/png',
             'Content-Length': buffer.length,
           });
