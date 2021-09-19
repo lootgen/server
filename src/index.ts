@@ -55,7 +55,10 @@ import { ALL_RESOLVERS } from './resolvers';
     app.use(cors());
     registerExpressAPI(app);
 
-    server.applyMiddleware({ app, cors: false });
+    server.applyMiddleware({
+      app,
+      cors: { origin: 'https://www.lootgen.party' },
+    });
 
     const PORT = process.env.PORT || 4000;
     const appServer = app.listen({ port: PORT });
