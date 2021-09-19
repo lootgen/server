@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
 import * as PostgresConnectionStringParser from 'pg-connection-string';
 import { env } from 'process';
 import { buildSchema } from 'type-graphql';
@@ -9,6 +10,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 
 import { registerAllEntities } from './entity';
 import { ALL_RESOLVERS } from './resolvers';
+import registerExpressAPI from './api';
 
 // Set up the DB connection and Apollo server
 (async (): Promise<void> => {
@@ -46,10 +48,23 @@ import { ALL_RESOLVERS } from './resolvers';
     });
 
     const server = new ApolloServer({ schema });
+    await server.start();
+
+    const app = express();
+    registerExpressAPI(app);
+
+    server.applyMiddleware({ app });
 
     const PORT = process.env.PORT || 4000;
-    const { url } = await server.listen({ port: PORT });
-    console.log(`🚀 Server ready at ${url}`);
+    const appServer = app.listen({ port: PORT });
+    console.log(
+      `🚀 GraphQL API ready at http://localhost:${appServer.address().port}${
+        server.graphqlPath
+      }`
+    );
+    console.log(
+      `💥 REST API ready at http://localhost:${appServer.address().port}/`
+    );
   } catch (error) {
     console.error(error);
   }
