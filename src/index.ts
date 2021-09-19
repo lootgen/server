@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import { ApolloServer } from 'apollo-server-express';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 import express from 'express';
 import * as PostgresConnectionStringParser from 'pg-connection-string';
 import { env } from 'process';
@@ -52,12 +52,12 @@ import { ALL_RESOLVERS } from './resolvers';
     await server.start();
 
     const app = express();
-    app.use(cors());
+    const corsOptions: CorsOptions = { origin: 'http://www.lootget.party' };
+    app.use(cors(corsOptions));
     registerExpressAPI(app);
 
     server.applyMiddleware({
       app,
-      cors: { origin: 'https://www.lootgen.party' },
     });
 
     const PORT = process.env.PORT || 4000;
