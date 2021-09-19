@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import { ApolloServer } from 'apollo-server-express';
+import cors from 'cors';
 import express from 'express';
 import * as PostgresConnectionStringParser from 'pg-connection-string';
 import { env } from 'process';
@@ -8,9 +9,9 @@ import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
+import registerExpressAPI from './api';
 import { registerAllEntities } from './entity';
 import { ALL_RESOLVERS } from './resolvers';
-import registerExpressAPI from './api';
 
 // Set up the DB connection and Apollo server
 (async (): Promise<void> => {
@@ -51,13 +52,7 @@ import registerExpressAPI from './api';
     await server.start();
 
     const app = express();
-    app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', '*');
-      res.setHeader('Access-Control-Allow-Headers', '*');
-      next();
-    });
-
+    app.use(cors());
     registerExpressAPI(app);
 
     server.applyMiddleware({ app, cors: false });
