@@ -60,7 +60,7 @@ import registerExpressAPI from './api';
 
     registerExpressAPI(app);
 
-    server.applyMiddleware({ app });
+    server.applyMiddleware({ app, cors: false });
 
     const PORT = process.env.PORT || 4000;
     const appServer = app.listen({ port: PORT });
