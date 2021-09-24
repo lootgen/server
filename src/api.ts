@@ -1,45 +1,53 @@
+import { createCanvas, registerFont } from 'canvas';
 import * as core from 'express-serve-static-core';
-import svg2img from 'svg2img';
+import { fillTextWithTwemoji } from 'node-canvas-with-twemoji';
 
-import { ILootBag } from './entity/interfaces/loot_bag_interface';
 import { LootBag } from './entity/loot_bag';
 
-const createSVGForLoot = (lootBag: ILootBag): string => {
-  const svgStrings = [
-    '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 350 350">',
-    '<defs><style type="text/css">@import url("https://fonts.googleapis.com/css?family=EB+Garamond");</style></defs>',
-    '<style>.base { fill: white; font-family: "EB Garamond", serif; font-size: 24px; }</style><rect width="100%" height="100%" fill="black" />',
-  ];
-  lootBag.items.forEach((lootItem, index) => {
-    svgStrings.push(`<text x="24" y="${(index + 1) * 31}" class="base">`);
-    svgStrings.push(lootItem.item.name);
-    svgStrings.push('</text>');
-  });
-  svgStrings.push('</svg>');
-  return svgStrings.join('');
-};
+const WIDTH = 1200;
+const HEIGHT = 628;
+const multiplier = 2.5;
 
 const registerExpressAPI = (app: core.Express): void => {
   app.get('/loot/:id/image.png', async (req, res) => {
     try {
+      registerFont('src/fonts/EBGaramond.ttf', { family: 'EBGaramond' });
       const lootBag = await LootBag.findOneOrFail(req.params.id);
-      const svg = createSVGForLoot(lootBag);
-      svg2img(
-        svg,
-        {
-          width: 1024,
-          height: 1024,
-          quality: 100,
-        },
-        (error, buffer) => {
-          res.writeHead(200, {
-            'Content-Type': 'image/png',
-            'Content-Length': buffer.length,
-          });
-          res.end(buffer);
-        }
-      );
+
+      const canvas = createCanvas(WIDTH, HEIGHT);
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'end';
+
+      ctx.font = `${multiplier * 13}px "EBGaramond"`;
+      ctx.fillText(`#${lootBag.id}`, WIDTH - 18 * multiplier, 26 * multiplier);
+
+      ctx.textAlign = 'start';
+      ctx.font = `${multiplier * 20}px "EBGaramond"`;
+
+      for (let i = 0; i < lootBag.items.length; i++) {
+        const itemName = lootBag.items[i].item.name;
+        await fillTextWithTwemoji(
+          ctx,
+          itemName,
+          24 * multiplier,
+          26 + (i + 1) * 27 * multiplier
+        );
+      }
+
+      const buffer = canvas.toBuffer('image/png');
+
+      res.writeHead(200, {
+        'Content-Type': 'image/png',
+        'Content-Length': buffer.length,
+      });
+      res.end(buffer);
     } catch (error) {
+      console.log(error);
       res.sendStatus(404);
     }
   });
