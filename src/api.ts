@@ -11,7 +11,7 @@ const multiplier = 2.5;
 const registerExpressAPI = (app: core.Express): void => {
   app.get('/loot/:id/image.png', async (req, res) => {
     try {
-      registerFont('src/fonts/EBGaramond.ttf', { family: 'EBGaramond' });
+      registerFont('fonts/EBGaramond.ttf', { family: 'EBGaramond' });
       const lootBag = await LootBag.findOneOrFail(req.params.id);
 
       const canvas = createCanvas(WIDTH, HEIGHT);

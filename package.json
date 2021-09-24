@@ -19,7 +19,7 @@
     "watch-all": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-build\" \"npm run watch-node\"",
     "watch-build": "tsc -w",
     "node": "ts-node src/index.ts",
-    "build": "tsc;cp ormconfig.json dist",
+    "build": "tsc;cp ormconfig.json dist;cp -r fonts dist",
     "test": "jest",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "postinstall": "yarn build",
