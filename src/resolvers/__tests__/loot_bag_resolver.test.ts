@@ -73,9 +73,10 @@ describe('Loot Bag resolver', () => {
 
   it('throws error: loot items cannot be empty strings', async () => {
     const items = [...ITEMS];
+    items.splice(0, 1, '');
     const result = await global.client.mutate({
       mutation: CREATE_LOOT_BAG_MUTATION,
-      variables: { items: items.splice(0, 1, '') },
+      variables: { items },
     });
     expect(result).toMatchSnapshot();
   });
@@ -92,6 +93,16 @@ describe('Loot Bag resolver', () => {
     const result = await global.client.mutate({
       mutation: CREATE_LOOT_BAG_MUTATION,
       variables: { items: ['gm', 'gm', 'gm', 'gm', 'gm', 'gm', 'gm', 'gm'] },
+    });
+    expect(result).toMatchSnapshot();
+  });
+
+  it('throws error: loot items cannot contain profanity', async () => {
+    const items = [...ITEMS];
+    items.splice(4, 1, 'dumb fUcK');
+    const result = await global.client.mutate({
+      mutation: CREATE_LOOT_BAG_MUTATION,
+      variables: { items },
     });
     expect(result).toMatchSnapshot();
   });

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "apollo-server": "^3.3.0",
+    "censor-sensor": "^1.0.6",
     "class-validator": "^0.13.1",
     "graphql": "^15.5.2",
     "node-canvas-with-twemoji": "^0.1.6",

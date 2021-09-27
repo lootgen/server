@@ -1,3 +1,4 @@
+import { CensorSensor } from 'censor-sensor';
 import { ILike } from 'typeorm';
 
 import { IItem } from './interfaces/item_interface';
@@ -5,6 +6,22 @@ import { ILootItem } from './interfaces/loot_item_interface';
 import { Item } from './item';
 import { LootBag } from './loot_bag';
 import { LootItem } from './loot_item';
+
+const censor = new CensorSensor();
+censor.disableTier(4);
+censor.removeWord('hell');
+censor.removeWord('damn');
+censor.removeWord('damnit');
+censor.removeWord('sex');
+censor.removeWord('sexy');
+censor.removeWord('playboy');
+censor.removeWord('nude');
+
+const itemsContainProfanity = (items: string[]): boolean => {
+  return items.some((item) =>
+    item.split(' ').some((word) => censor.isProfane(word))
+  );
+};
 
 interface LootBagInfo {
   bags: LootBag[];
@@ -69,6 +86,10 @@ const findExistingLootBag = async (
 };
 
 export const makeLootBag = async (items: string[]): Promise<LootBag> => {
+  if (itemsContainProfanity(items)) {
+    throw Error('Error: loot items contain profanity');
+  }
+
   let containsNewItem = false;
   const lootItems = await items.reduce(async (previous, item, index) => {
     const acc = await previous;

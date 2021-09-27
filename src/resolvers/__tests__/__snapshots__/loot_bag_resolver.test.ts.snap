@@ -325,3 +325,18 @@ Object {
   },
 }
 `;
+
+exports[`Loot Bag resolver throws error: loot items cannot contain profanity 1`] = `
+Object {
+  "data": null,
+  "errors": Array [
+    [GraphQLError: Error: loot items contain profanity],
+  ],
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;
